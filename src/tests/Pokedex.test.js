@@ -8,8 +8,6 @@ import App from '../App';
 const pokemons = ['Pikachu', 'Charmander', 'Caterpie', 'Ekans', 'Alakazam',
   'Mew', 'Rapidash', 'Snorlax', 'Dragonair'];
 
-const types = ['All', 'Electric', 'Fire', 'Bug', 'Poison', 'Psychic', 'Normal', 'Dragon'];
-
 describe('Testings in the "Pokédex" component. It...', () => {
   it('Should have a "H2" with a message.',
     () => {
@@ -28,137 +26,203 @@ describe('Testings in the "Pokédex" component. It...', () => {
       expect(screenMessage).toBeInTheDocument();
     });
 
-  pokemons.forEach((pokemon, index) => {
-    it(`Renders the pokémon '${pokemon}' on the page.`, async () => {
-      const customHistory = createMemoryHistory();
-      render(
-        <Router history={ customHistory }>
-          <App />
-        </Router>,
-      );
+  // pokemons.forEach((pokemon, index) => {
+  //   it(`Renders the pokémon '${pokemon}' on the page.`, async () => {
+  //     const customHistory = createMemoryHistory();
+  //     render(
+  //       <Router history={ customHistory }>
+  //         <App />
+  //       </Router>,
+  //     );
 
-      customHistory.push('/');
+  //     customHistory.push('/');
 
-      const nextButtonEvent = () => {
-        const nextButton = screen.getByRole('button', {
-          name: /próximo pokémon/i });
+  //     const nextButtonEvent = () => {
+  //       const nextButton = screen.getByRole('button', {
+  //         name: /próximo pokémon/i });
 
-        userEvent.click(nextButton);
-      };
+  //       userEvent.click(nextButton);
+  //     };
 
-      Array.from({ length: index }, () => nextButtonEvent());
+  //     Array.from({ length: index }, () => nextButtonEvent());
 
-      const pokemonName = await screen.findByText(pokemon);
+  //     const pokemonName = await screen.findByText(pokemon);
 
-      expect(pokemonName).toBeInTheDocument();
-    });
+  //     expect(pokemonName).toBeInTheDocument();
+  //   });
+  // });
+
+  it('Renders all pokémons on the page.', async () => {
+    const customHistory = createMemoryHistory();
+    render(
+      <Router history={ customHistory }>
+        <App />
+      </Router>,
+    );
+
+    customHistory.push('/');
+
+    const nextButton = screen.getByRole('button', {
+      name: /próximo pokémon/i });
+
+    expect(screen.getByText(pokemons[0])).toBeInTheDocument();
+    userEvent.click(nextButton);
+
+    expect(screen.getByText(pokemons[1])).toBeInTheDocument();
+    userEvent.click(nextButton);
+
+    expect(screen.getByText(pokemons[2])).toBeInTheDocument();
+    userEvent.click(nextButton);
+
+    expect(screen.getByText(pokemons[3])).toBeInTheDocument();
+    userEvent.click(nextButton);
+
+    expect(screen.getByText(pokemons[4])).toBeInTheDocument();
+    userEvent.click(nextButton);
+
+    expect(screen.getByText(pokemons[5])).toBeInTheDocument();
+    userEvent.click(nextButton);
+
+    expect(screen.getByText(pokemons[6])).toBeInTheDocument();
+    userEvent.click(nextButton);
+
+    expect(screen.getByText(pokemons[7])).toBeInTheDocument();
+    userEvent.click(nextButton);
+
+    expect(screen.getByText(pokemons[8])).toBeInTheDocument();
+    userEvent.click(nextButton);
   });
 
-  types.forEach((type, index) => {
-    it(`Renders a button of the ${type} type.`, async () => {
-      const customHistory = createMemoryHistory();
-      render(
-        <Router history={ customHistory }>
-          <App />
-        </Router>,
-      );
+  it('Renders all types buttons in the page.', async () => {
+    const customHistory = createMemoryHistory();
+    render(
+      <Router history={ customHistory }>
+        <App />
+      </Router>,
+    );
 
-      customHistory.push('/');
+    customHistory.push('/');
 
-      const dataTestId = 'pokemon-type-button';
+    const dataTestId = 'pokemon-type-button';
 
-      const nextButton = screen.getByRole('button', {
-        name: /próximo pokémon/i });
+    const nextButton = screen.getByRole('button', {
+      name: /próximo pokémon/i });
 
-      const allButton = screen.getByRole('button', {
-        name: 'All',
-      });
-
-      const button = screen.getByRole('button', {
-        name: type,
-      });
-
-      if (type === 'Electric') {
-        userEvent.click(button);
-        const pokemon1 = await screen.findByText('Pikachu');
-
-        expect(pokemon1).toBeInTheDocument();
-
-        const hasDataTest = screen.getAllByTestId(dataTestId);
-        expect(hasDataTest[index]).toBeInTheDocument();
-      }
-
-      if (type === 'Fire') {
-        userEvent.click(button);
-        const pokemon1 = await screen.findByText('Charmander');
-        expect(pokemon1).toBeInTheDocument();
-
-        userEvent.click(nextButton);
-
-        const pokemon2 = await screen.findByText('Rapidash');
-        expect(pokemon2).toBeInTheDocument();
-
-        const hasDataTest = screen.getAllByTestId(dataTestId);
-        expect(hasDataTest[index]).toBeInTheDocument();
-      }
-
-      if (type === 'Bug') {
-        userEvent.click(button);
-        const pokemon1 = await screen.findByText('Caterpie');
-        expect(pokemon1).toBeInTheDocument();
-
-        const hasDataTest = screen.getAllByTestId(dataTestId);
-        expect(hasDataTest[index]).toBeInTheDocument();
-      }
-
-      if (type === 'Poison') {
-        userEvent.click(button);
-        const pokemon1 = await screen.findByText('Ekans');
-        expect(pokemon1).toBeInTheDocument();
-
-        const hasDataTest = screen.getAllByTestId(dataTestId);
-        expect(hasDataTest[index]).toBeInTheDocument();
-      }
-
-      if (type === 'Psychic') {
-        userEvent.click(button);
-        const pokemon1 = await screen.findByText('Alakazam');
-        expect(pokemon1).toBeInTheDocument();
-
-        userEvent.click(nextButton);
-
-        const pokemon2 = await screen.findByText('Mew');
-        expect(pokemon2).toBeInTheDocument();
-
-        const hasDataTest = screen.getAllByTestId(dataTestId);
-        expect(hasDataTest[index]).toBeInTheDocument();
-      }
-
-      if (type === 'Normal') {
-        userEvent.click(button);
-        const pokemon1 = await screen.findByText('Snorlax');
-        expect(pokemon1).toBeInTheDocument();
-
-        const hasDataTest = screen.getAllByTestId(dataTestId);
-        expect(hasDataTest[index]).toBeInTheDocument();
-      }
-
-      if (type === 'Dragon') {
-        userEvent.click(button);
-        const pokemon1 = await screen.findByText('Dragonair');
-        expect(pokemon1).toBeInTheDocument();
-
-        const hasDataTest = screen.getAllByTestId(dataTestId);
-        expect(hasDataTest[index - 1]).toBeInTheDocument();
-      }
-
-      userEvent.click(allButton);
-
-      const firstPokemon = await screen.findByText('Pikachu');
-
-      expect(firstPokemon).toBeInTheDocument();
-      expect(button).toBeInTheDocument();
-      expect(allButton).toBeInTheDocument();
+    const allButton = screen.getByRole('button', {
+      name: 'All',
     });
+
+    // ELECTRIC _________________________________________________
+
+    const electric = screen.getByRole('button', {
+      name: /electric/i,
+    });
+
+    userEvent.click(electric);
+
+    expect(electric).toBeInTheDocument();
+
+    expect(screen.getByText('Pikachu')).toBeInTheDocument();
+
+    expect(screen.getAllByTestId(dataTestId)[0]).toBeInTheDocument();
+
+    // FIRE ___________________________________________________________
+
+    const fire = screen.getByRole('button', {
+      name: /fire/i,
+    });
+
+    userEvent.click(fire);
+
+    expect(fire).toBeInTheDocument();
+
+    expect(screen.getByText('Charmander')).toBeInTheDocument();
+
+    userEvent.click(nextButton);
+
+    expect(screen.getByText('Rapidash')).toBeInTheDocument();
+
+    expect(screen.getAllByTestId(dataTestId)[1]).toBeInTheDocument();
+
+    // BUG ___________________________________________________________
+
+    const bug = screen.getByRole('button', {
+      name: /bug/i,
+    });
+
+    userEvent.click(bug);
+
+    expect(bug).toBeInTheDocument();
+
+    expect(screen.getByText('Caterpie')).toBeInTheDocument();
+
+    expect(screen.getAllByTestId(dataTestId)[2]).toBeInTheDocument();
+
+    // POISON ___________________________________________________________
+
+    const poison = screen.getByRole('button', {
+      name: /poison/i,
+    });
+
+    userEvent.click(poison);
+
+    expect(poison).toBeInTheDocument();
+
+    expect(screen.getByText('Ekans')).toBeInTheDocument();
+
+    expect(screen.getAllByTestId(dataTestId)[3]).toBeInTheDocument();
+
+    // PSYCHIC ___________________________________________________________
+
+    const psychic = screen.getByRole('button', {
+      name: /psychic/i,
+    });
+
+    userEvent.click(psychic);
+
+    expect(psychic).toBeInTheDocument();
+
+    expect(screen.getByText('Alakazam')).toBeInTheDocument();
+
+    userEvent.click(nextButton);
+
+    expect(screen.getByText('Mew')).toBeInTheDocument();
+
+    expect(screen.getAllByTestId(dataTestId)[4]).toBeInTheDocument();
+
+    // NORMAL ___________________________________________________________
+
+    const normal = screen.getByRole('button', {
+      name: /normal/i,
+    });
+
+    userEvent.click(normal);
+
+    expect(normal).toBeInTheDocument();
+
+    expect(screen.getByText('Snorlax')).toBeInTheDocument();
+
+    expect(screen.getAllByTestId(dataTestId)[5]).toBeInTheDocument();
+
+    // DRAGON ___________________________________________________________
+
+    const dragon = screen.getByRole('button', {
+      name: /dragon/i,
+    });
+
+    userEvent.click(dragon);
+
+    expect(dragon).toBeInTheDocument();
+
+    expect(screen.getByText('Dragonair')).toBeInTheDocument();
+
+    expect(screen.getAllByTestId(dataTestId)[6]).toBeInTheDocument();
+
+    userEvent.click(allButton);
+
+    const firstPokemon = await screen.findByText('Pikachu');
+
+    expect(firstPokemon).toBeInTheDocument();
+    expect(allButton).toBeInTheDocument();
   });
 });
