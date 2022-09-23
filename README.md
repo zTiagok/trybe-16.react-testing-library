@@ -1,9 +1,9 @@
 <div align="center">
   <h3>
-    Check out this project <a href="-"> website</a>! 
+    I'm working on this project <a href="-"> website</a>! 
   <h3>
   <h2>
-    -
+    React Testing Library
     <br><br>
   </h2>
 
@@ -21,16 +21,16 @@
     🚨 Warning 🚨
   </h3>
   <br>
-  <span> The test files were provided by Trybe to evaluate the project. </span>
+  <span> All the components and some test files were provided by Trybe to evaluate the project. </span>
+  <br><br>
+  <b> The tests in the "/src/tests" folder were all made by me! </b>
   <br>
   <hr>
   <h3>
     ℹ️ Information ℹ️
   </h3>
   <br>
-  <span> - </span> 
-  <br><br>
-  <span> - </span>
+  <span> A test environment designed to cover the components that simulate a Pokedéx. This is my first contact with testing in React, using Stryker to evaluate test coverage. </span> 
   <br>
   <hr>
   <h3>
@@ -39,27 +39,21 @@
   <div align="left">
   <br>
   
-- [X] 1. 
-- [X] 2. 
-- [X] 3. 
-- [X] 4. 
-- [X] 5. 
-- [X] 6. 
-- [X] 7. 
-- [X] 8.
-- [X] 9. 
-- [X] 10. 
-- [X] 11. 
-- [X] 12. 
+- [X] 1. Test the `App` component.
+- [X] 2. Test the `About` component.
+- [X] 3. Test the `FavoritePokemons` component.
+- [X] 4. Test the `NotFound` component.
+- [X] 5. Test the `Pokedex` component.
+- [X] 6. Test the `Pokemon` component.
   </div>
   <br>
   <hr>
   <h3>
-    📄 Pages and Components 📄
+   📄 Features 📄
   </h3>
   <br>
-  <span> - </span>
-  <br>
+  <span> ◐ An RTL testing environment designed to cover 100% of the components provided by Trybe. ◑ </span>
+  <br><br>
   <hr>
   <h3>
     📦 Frameworks and Libraries 📦
@@ -72,8 +66,12 @@
     </thead>
     <tbody>
       <tr>
-        <td> - </td>
-        <td> - </td>
+        <td> ReactJS </td>
+        <td> 17.0.2 </td>
+      </tr>
+        <tr>
+        <td> React Router DOM </td>
+        <td> 17.0.2 </td>
       </tr>
     </tbody>
   </table>
