@@ -52,7 +52,7 @@
    📄 Features 📄
   </h3>
   <br>
-  <span> ◐ An RTL testing environment designed to cover 100% of the components provided by Trybe. ◑ </span>
+  <span> ◐ An RTL environment designed to cover 100% of the components provided by Trybe. ◑ </span>
   <br><br>
   <hr>
   <h3>
